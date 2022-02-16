@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websocket</title>
+    <script defer>
+        var connected = false;
+
+        function connect() {
+            var ws = new WebSocket("ws://localhost:8888/websocket");
+            if (ws) {
+                connected = true;
+            }
+            ws.onopen = () => {
+                ws.send("Connected!");
+            };
+            ws.onmessage = (evt) => {
+                console.log(evt.data);
+            }
+        }
+
+        function sendMessage() {
+            msg = document.getElementById("msg").value;
+            ws.send(msg);
+        }
+
+        if (connected) {
+            
+        }
+    </script>
+</head>
+<body>
+    <p>Digite a mensagem:</p><br>
+    <input type="text" id="msg"><br><br>
+    <button id="btn" onclick="sendMessage()">CLIQUE AQUI</button>
+</body>
+</html>
