@@ -20,9 +20,15 @@ class WebSocket(tornado.websocket.WebSocketHandler, ABC):
         print("Closing WebSocket...")
 
 
+class BasicRequestHandler(tornado.web.RequestHandler, ABC):
+    def get(self):
+        self.write("Hello World!")
+
+
 if __name__ == "__main__":
     app = tornado.web.Application([
         (r"/websocket", WebSocket),
+        (r"/", BasicRequestHandler)
     ])
     app.listen(8888)
     print("listening on port 8888")
